@@ -62,12 +62,16 @@ export const Input = styled.input`
   background-color: ${(props) => props.theme.colors["yellow-300"]};
 `;
 
+export const DivIcon = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 export const EyeIcon = styled.div`
   position: absolute;
-  top: 50%;
-  bottom: 40%;
-  right: 10px;
-  transform: translateY(-50%);
+  right: 0;
+  padding-top: 10px;
+  padding-right: 10px;
   cursor: pointer;
 `;
 

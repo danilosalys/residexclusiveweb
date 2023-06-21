@@ -11,12 +11,14 @@ import {
   EyeIcon,
   Button,
   LogoImage,
+  DivIcon,
 } from "./styles";
 import { useForm } from "react-hook-form";
 import Logo from "../../assets/images/logo.jpg";
 
 export function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -27,6 +29,7 @@ export function SignIn() {
 
   const onSubmit = async (data: any) => {
     console.log(data);
+    navigate("/dashboard");
   };
 
   return (
@@ -40,7 +43,7 @@ export function SignIn() {
               <Input
                 type="text"
                 {...register("user", {
-                  required: true,
+                  // required: true,
                   pattern: /^\S+@\S+$/i,
                 })}
               />
@@ -48,21 +51,28 @@ export function SignIn() {
             </InputContainer>
             <InputContainer>
               Senha:
-              <Input
-                type={showPassword ? "text" : "password"}
-                {...register("password", { required: true })}
-              />
+              <DivIcon>
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  {...register("password", {
+                    //  required: true
+                  })}
+                />
+                <EyeIcon
+                  onClick={() => setShowPassword(!showPassword)}
+                  title={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                >
+                  {showPassword ? (
+                    <AiOutlineEyeInvisible
+                      size={22}
+                      style={{ color: "black" }}
+                    />
+                  ) : (
+                    <AiOutlineEye size={22} style={{ color: "black" }} />
+                  )}
+                </EyeIcon>
+              </DivIcon>
               {errors.password && <span>Senha é obrigatória</span>}
-              <EyeIcon
-                onClick={() => setShowPassword(!showPassword)}
-                title={showPassword ? "Ocultar senha" : "Mostrar senha"}
-              >
-                {showPassword ? (
-                  <AiOutlineEyeInvisible size={22} style={{ color: "black" }} />
-                ) : (
-                  <AiOutlineEye size={22} style={{ color: "black" }} />
-                )}
-              </EyeIcon>
             </InputContainer>
           </GroupInput>
           <Button type="submit">Entrar</Button>
